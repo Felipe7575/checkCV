@@ -3,7 +3,7 @@ import { sql } from "drizzle-orm"
 
 
 
-export const userTable = pgTable("user", {
+export const user = pgTable("user", {
 	id: text().primaryKey().notNull(),
 	age: integer(),
 	username: text().notNull(),
@@ -12,19 +12,19 @@ export const userTable = pgTable("user", {
 	unique("user_username_key").on(table.username),
 ]);
 
-export const sessionTable = pgTable("session", {
+export const session = pgTable("session", {
 	id: text().primaryKey().notNull(),
 	userId: text("user_id").notNull(),
 	expiresAt: timestamp("expires_at", { withTimezone: true, mode: 'string' }).notNull(),
 }, (table) => [
 	foreignKey({
 			columns: [table.userId],
-			foreignColumns: [userTable.id],
+			foreignColumns: [user.id],
 			name: "session_user_id_fkey"
 		}).onDelete("cascade"),
 ]);
 
-export const filesTable = pgTable("files", {
+export const files = pgTable("files", {
 	id: uuid().defaultRandom().primaryKey().notNull(),
 	userId: text("user_id").notNull(),
 	fileUrl: text("file_url").notNull(),
@@ -33,11 +33,7 @@ export const filesTable = pgTable("files", {
 }, (table) => [
 	foreignKey({
 			columns: [table.userId],
-			foreignColumns: [userTable.id],
+			foreignColumns: [user.id],
 			name: "files_user_id_fkey"
 		}).onDelete("cascade"),
 ]);
-
-export type SessionTable = typeof sessionTable.$inferSelect;
-
-export type UserTable = typeof userTable.$inferSelect;
