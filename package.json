@@ -44,12 +44,17 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@ai-sdk/anthropic": "^1.1.15",
+		"@ai-sdk/openai": "^1.2.1",
 		"@neondatabase/serverless": "^0.10.4",
 		"@node-rs/argon2": "^2.0.2",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
 		"@vercel/blob": "^0.27.2",
+		"ai": "^4.1.54",
 		"drizzle-orm": "^0.40.0",
+		"multer": "1.4.5-lts.1",
+		"pdf-poppler": "^0.2.1",
 		"sveltekit-superforms": "^2.23.1",
 		"zod": "^3.24.2"
 	},
